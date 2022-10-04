@@ -1,0 +1,24 @@
+# OS and editor crap
+.DS_Store
+.idea
+nbproject
+*.sublime*
+*.sublime*/
+.vscode/
+
+# Environment
+.env
+
+# Composer Stuff
+auth.json
+/vendor
+
+# TYPO3 common
+/var/*
+!/var/labels
+/public/*
+!/public/.htaccess
+!/public/typo3conf
+/public/typo3conf/*
+!/public/typo3conf/LocalConfiguration.php
+!/public/typo3conf/AdditionalConfiguration.php
