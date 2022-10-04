@@ -1,0 +1,5 @@
+page {
+    includeCSS {
+      override = EXT:my_sitepackage/Resources/Public/CSS/Bootstrap_overrides.css
+    }
+}

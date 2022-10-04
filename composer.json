@@ -15,6 +15,7 @@
 	"require": {
 		"helhum/config-loader": "^0.12.5",
 		"helhum/typo3-console": "^7.1",
+		"snowowl78/my_sitepackage": "^0.1.0",
 		"typo3/cms-backend": "^11.5.0",
 		"typo3/cms-belog": "^11.5.0",
 		"typo3/cms-beuser": "^11.5.0",
@@ -51,5 +52,11 @@
 	},
 	"require-dev": {
 		"deployer/deployer": "^7.0"
+	},
+	"repositories": {
+		"local-extensions": {
+			"type": "path",
+			"url": "extensions/*"
+		}
 	}
 }

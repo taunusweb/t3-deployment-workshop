@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a58a81852f69752cf01715a740035c5c",
+    "content-hash": "2eecee4566f1c38799ecb98a77637da0",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2383,6 +2383,58 @@
                 "source": "https://github.com/scssphp/scssphp/tree/v1.11.0"
             },
             "time": "2022-09-02T21:24:55+00:00"
+        },
+        {
+            "name": "snowowl78/my_sitepackage",
+            "version": "0.1",
+            "dist": {
+                "type": "path",
+                "url": "extensions/my_sitepackage",
+                "reference": "c0a61798854e077b5451714dbeb49c61469b4e3e"
+            },
+            "require": {
+                "php": "^7.4 || ^8",
+                "typo3/cms-backend": "^9.5 || ^10.4 || ^11.0",
+                "typo3/cms-core": "^9.5 || ^10.4 || ^11.0"
+            },
+            "require-dev": {
+                "nimut/testing-framework": "^4.2 || ^5.1"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "my_sitepackage"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Snowowl78\\MySitepackage\\": "Classes/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": {
+                "name": "Thorsten Weber",
+                "role": "Developer",
+                "email": "snowowl78@gmail.com",
+                "homepage": "www.thorsten-weber.eu"
+            },
+            "description": "An example extension",
+            "keywords": [
+                "extension",
+                "typo3"
+            ],
+            "support": {
+                "issues": "https://github.com/snowowl78/my_sitepackage/issues"
+            },
+            "funding": {
+                "type": "other",
+                "url:": "myfundpage.org/vendorname"
+            },
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "symfony/cache",

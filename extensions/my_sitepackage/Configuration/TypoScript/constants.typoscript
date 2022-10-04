@@ -1,0 +1,4 @@
+config {
+  concatenateJs = 0
+  concatenateCss = 0
+}
