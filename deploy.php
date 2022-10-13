@@ -8,6 +8,7 @@ require 'contrib/rsync.php';
 //** Config **
 
 $deployPath = '/home/www/p485699/html/t3-dep-ws';
+$deployPathProd = '/var/www/virtual/snowowl/serve';
 
 // Set TYPO3 Docroot/ Webroot
 set('typo3_webroot', 'public');
@@ -21,13 +22,15 @@ set('rsync', [
     'exclude' =>[
 //        'composer.json',
 //        'composer.lock',
-        'deploy.php',
         '.ddev',
         '.env',
         '.git',
         '.gitignore',
+        'deploy.php',
         'LICENSE',
         'README.md',
+        'public/fileadmin',
+        'public/typo3temp',
     ],
     'exclude-file' => false,
     'filter' => [],
@@ -51,11 +54,14 @@ add('shared_files', [
 //    '{{typo3_webroot}}/typo3conf/LocalConfiguration.php'
 ]);
 add('shared_dirs', [
-    '{{typo3_webroot}}/fileadmin'
+    '{{typo3_webroot}}/fileadmin',
+    '{{typo3_webroot}}/typo3temp',
+    '{{release_path}}/var/lock',
+    '{{release_path}}/var/log',
 ]);
 add('writable_dirs', []);
 
-set('writeable_mode', 'chmod');
+set('writeable_mode', 'skip');
 //set('writable_chmod_mode', 'u=rwX,go=rX');
 set('log_files', '/var/www/html/logs.txt');
 
@@ -77,13 +83,17 @@ host('stage')
 /**
  * setup live host
  */
-host('live')
+host('stage-p')
     ->setLabels([
         'stage' => 'production'
     ])
     ->set('stageDir', 'production')
+//    ->setHostname('p485699.webspaceconfig.de')
+//    ->setDeployPath($deployPath . '/{{stageDir}}')
+//    ->setRemoteUser( 'p485699')
+//    ->set('http_user', 'p485699')
     ->setHostname('regulus.uberspace.de')
-    ->setDeployPath($deployPath . '/{{stageDir}}')
+    ->setDeployPath($deployPathProd . '/{{stageDir}}')
     ->setRemoteUser( 'snowowl')
     /*->set('deploy_path', '~/t3deployws')*/;
 
@@ -118,7 +128,7 @@ task('deploy:prepare', [
     'deploy:release',
     'rsync',
     'deploy:shared',
-    'deploy:writable'
+//    'deploy:writable'
 ]);
 
 desc('Deploy customized');
