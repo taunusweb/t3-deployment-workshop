@@ -21,7 +21,6 @@ class ConfigLoaderFactory
      */
     public static function buildLoader($context, $rootDir, $fixedCacheIdentifier = null, array $additionalFileWatches = array())
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($rootDir, '$rootDir'); die();
         $confDir = $rootDir . '/config';
         $cacheDir = $rootDir . '/var/cache';
 

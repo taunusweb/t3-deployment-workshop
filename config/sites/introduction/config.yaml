@@ -1,4 +1,4 @@
-base: /
+base: '%env(SITE_BASE)%'
 errorHandling:
   -
     errorCode: 404
@@ -46,4 +46,4 @@ languages:
     fallbacks: '1,0'
     flag: de
 rootPageId: 2
-websiteTitle: 'TYPO3 Introduction Package'
+websiteTitle: 'TYPO3 Deployment Workshop with Introduction Package'

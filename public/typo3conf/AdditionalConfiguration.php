@@ -1,56 +1,32 @@
 <?php
 
 
-/*
-if (getenv('IS_DDEV_PROJECT') == 'true') {
-    $GLOBALS['TYPO3_CONF_VARS'] = array_replace_recursive(
-        $GLOBALS['TYPO3_CONF_VARS'],
-        [
-            'DB' => [
-                'Connections' => [
-                    'Default' => [
-                        'dbname' => 'db',
-                        'driver' => 'mysqli',
-                        'host' => 'db',
-                        'password' => 'db',
-                        'port' => '3306',
-                        'user' => 'db',
-                    ],
-                ],
-            ],
-            // This GFX configuration allows processing by installed ImageMagick 6
-            'GFX' => [
-                'processor' => 'ImageMagick',
-                'processor_path' => '/usr/bin/',
-                'processor_path_lzw' => '/usr/bin/',
-            ],
-            // This mail configuration sends all emails to mailhog
-            'MAIL' => [
-                'transport' => 'smtp',
-                'transport_smtp_encrypt' => false,
-                'transport_smtp_server' => 'localhost:1025',
-            ],
-            'SYS' => [
-                'trustedHostsPattern' => '.*.*',
-                'devIPmask' => '*',
-                'displayErrors' => 1,
-            ],
-        ]
-    );
-}*/
 $context = \TYPO3\CMS\Core\Core\Environment::getContext()->isProduction() ? 'production' : 'development';
 $context = \TYPO3\CMS\Core\Core\Environment::getContext()->isTesting() ? 'testing' : $context;
 $subContext = explode('/', \TYPO3\CMS\Core\Core\Environment::getContext()->__toString());
 $context .= isset($subContext[1]) ? '-' . strtolower($subContext[1]) : '';
-$configLoader = \Snowowl78\Distribution\ConfigLoaderFactory::buildLoader(
-    $context,
-    $rootDir = dirname(dirname(__DIR__)),
-    $fixedCacheIdentifier = getenv('CONFIGURATION_CACHE_IDENTIFIER')
-);
 
-\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(getenv(), 'getenv');
-$GLOBALS['TYPO3_CONF_VARS'] = array_replace_recursive(
-    $GLOBALS['TYPO3_CONF_VARS'],
-    $configLoader->load()
-);
+$dotenv = \Dotenv\Dotenv::createUnsafeMutable(dirname(__DIR__,2) . '/');
+$dotenv->load();
 
+// Database Credentials
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = getenv('TYPO3_DB_HOST');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = getenv('TYPO3_DB_USERNAME');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('TYPO3_DB_PASSWORD');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('TYPO3_DB_DATABASE');
+$GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port'] = getenv('TYPO3_DB_PORT');
+
+// Graphics
+$GLOBALS['TYPO3_CONF_VARS']['GFX']['processor'] = getenv('TYPO3_GFX_PROCESSOR');
+$GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_path'] = getenv('TYPO3_GFX_PROCESSOR_PATH');
+$GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_path_lzw'] = getenv('TYPO3_GFX_PROCESSOR_PATH_LZW');
+
+// Mail
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = getenv('TYPO3_MAIL_TRANSPORT');
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = getenv('TYPO3_MAIL_TRANSPORT_SMTP_SERVER');
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_sendmail_command'] = getenv('TYPO3_MAIL_TRANSPORT_SENDMAIL_COMMAND');
+
+// System
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = getenv('TYPO3_TRUSTED_HOSTS_PATTERN');
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] = getenv('TYPO3_SITENAME') ? '[' . $context . '] | '. getenv('TYPO3_SITENAME') : '[' . $context . '] TYPO3 11 Test Site';
+$GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = getenv('TYPO3_INSTALL_TOOL');

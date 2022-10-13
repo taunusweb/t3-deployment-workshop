@@ -129,6 +129,6 @@ return [
                 ),
             ]
         ],
-        'trustedHostsPattern' => '.*'
+        'trustedHostsPattern' => getenv('TYPO3_TRUSTED_HOSTS_PATTERN') ?: '.*'
     ],
 ];
