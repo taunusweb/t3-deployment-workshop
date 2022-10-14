@@ -13,6 +13,7 @@
         "sort-packages": true
     },
     "require": {
+        "deployer/deployer": "^7.0",
         "helhum/config-loader": "^0.12.5",
         "helhum/typo3-console": "^7.1",
         "snowowl78/my_sitepackage": "^0.1.0",
@@ -50,9 +51,6 @@
         "post-autoload-dump": [
             "@typo3-cms-scripts"
         ]
-    },
-    "require-dev": {
-        "deployer/deployer": "^7.0"
     },
     "repositories": {
         "local-extensions": {
