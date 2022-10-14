@@ -10,7 +10,7 @@ try {
     $dotenv = \Dotenv\Dotenv::createUnsafeMutable(dirname(__DIR__,2) . '/');
     $dotenv->load();
 } catch (\Dotenv\Exception\InvalidPathException $exception) {
-        printf("Missing dotenv file: %s", $exception->getMessage());
+        printf("[WARNING]: Missing dotenv file -> %s \n", $exception->getMessage());
 }
 
 
