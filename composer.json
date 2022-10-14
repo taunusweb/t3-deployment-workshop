@@ -13,6 +13,7 @@
         "sort-packages": true
     },
     "require": {
+        "deployer/deployer": "^7.0",
         "helhum/config-loader": "^0.12.5",
         "helhum/typo3-console": "^7.1",
         "snowowl78/my_sitepackage": "^0.1.0",
@@ -40,7 +41,8 @@
         "typo3/cms-sys-note": "^11.5.0",
         "typo3/cms-t3editor": "^11.5.0",
         "typo3/cms-tstemplate": "^11.5.0",
-        "typo3/cms-viewpage": "^11.5.0"
+        "typo3/cms-viewpage": "^11.5.0",
+        "vlucas/phpdotenv": "^5.4"
     },
     "scripts":{
         "typo3-cms-scripts": [
@@ -49,9 +51,6 @@
         "post-autoload-dump": [
             "@typo3-cms-scripts"
         ]
-    },
-    "require-dev": {
-        "deployer/deployer": "^7.0"
     },
     "repositories": {
         "local-extensions": {

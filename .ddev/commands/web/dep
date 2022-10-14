@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This assumes that the typo3cms command will be in the $PATH; if in vendor/bin/ it will be
+
+## Description: Run deployer command inside the web container
+## Usage: dep [args]
+## Example: "ddev dep deploy stage" or "ddev deploy list"
+## ProjectTypes: typo3
+## ExecRaw: true
+
+dep "$@"

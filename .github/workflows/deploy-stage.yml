@@ -1,0 +1,52 @@
+name: deploy
+
+on:
+  push:
+    branch:
+      - develop
+  workflow_dispatch:
+
+# It is important to specify "concurrency" for the workflow,
+# to prevent concurrency between different deploys.
+concurrency: Staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Staging
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      # need to build first
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Use Cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: |
+          composer install --no-dev --no-progress --optimize-autoloader
+
+      # then deploy this build to target with rsync
+      - name: Deploy
+        uses: deployphp/action@v1
+        with:
+          dep: deploy stage
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          STAGING_SSH_HOST: ${{ secrets.SSH_HOST }}
+          STAGING_SSH_USER: ${{ secrets.SSH_USER }}

@@ -12,6 +12,7 @@ Get going quickly with TYPO3 CMS.
 
 * Clone this project: `git clone ...`
 * Check DDEV config in `.ddev/config.yaml` / run `ddev config` to change values
+* `cp .env-dist .env` 
 * `ddev start`
 * `ddev composer install`
 

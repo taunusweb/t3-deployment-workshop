@@ -1,9 +1,9 @@
 <?php
 return [
     'BE' => [
-        'debug' => false,
+        'debug' => true,
         'explicitADmode' => 'explicitAllow',
-        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$SFlSZ0k2RDRFRUowNHN5RA$7AfBOwN9K4vc1UxyeZ0mnXASDIJzbceaNTsyKsFU0TQ',
+        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$TUJtZTFaYU5WSTJDQlFwZw$Zp16fGgVZYi6K2scGngF7p2Grw+hfAMdDBn3yqHM+nU',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
@@ -65,7 +65,7 @@ return [
         ],
     ],
     'FE' => [
-        'debug' => false,
+        'debug' => true,
         'disableNoCacheParameter' => true,
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
@@ -88,7 +88,7 @@ return [
                     'writerConfiguration' => [
                         'notice' => [
                             'TYPO3\CMS\Core\Log\Writer\FileWriter' => [
-                                'disabled' => true,
+                                'disabled' => false,
                             ],
                         ],
                     ],
@@ -136,15 +136,16 @@ return [
                 ],
             ],
         ],
-        'devIPmask' => '',
-        'displayErrors' => 0,
-        'encryptionKey' => '07354f9bd401f1804176207877267c06034eec492d6fd83964300fe1c4631ef8bf65782a174c0f3c1a784756ebd4d670',
-        'exceptionalErrors' => 4096,
+        'devIPmask' => '*',
+        'displayErrors' => 1,
+        'encryptionKey' => '4663722b96a650e19f526d5aa9aa7e1ca6c8ca93dfb93a112d8f9b5a1e667cdf679b698df157f7f7d7c0eb8dbc3eb46e',
+//        'exceptionalErrors' => 12290,
+        'exceptionalErrors' => E_WARNING | E_USER_ERROR | E_RECOVERABLE_ERROR/* | E_DEPRECATED | E_USER_DEPRECATED*/,
         'features' => [
             'unifiedPageTranslationHandling' => true,
             'yamlImportsFollowDeclarationOrder' => true,
         ],
-        'sitename' => 'T3 Deployment Session',
+        'sitename' => 'New TYPO3 Console site',
         'systemMaintainers' => [
             1,
         ],

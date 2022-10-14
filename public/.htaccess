@@ -292,12 +292,14 @@ AddDefaultCharset utf-8
 	RewriteRule ^.*$ - [E=CWD:%2]
 
 	# Rules to set ApplicationContext based on hostname
-	#RewriteCond %{HTTP_HOST} ^dev\.example\.com$
-	#RewriteRule .? - [E=TYPO3_CONTEXT:Development]
-	#RewriteCond %{HTTP_HOST} ^staging\.example\.com$
-	#RewriteRule .? - [E=TYPO3_CONTEXT:Production/Staging]
-	#RewriteCond %{HTTP_HOST} ^www\.example\.com$
-	#RewriteRule .? - [E=TYPO3_CONTEXT:Production]
+	RewriteCond %{HTTP_HOST} ^.*\.ddev\.site$
+	RewriteRule .? - [E=TYPO3_CONTEXT:Development]
+	RewriteCond %{HTTP_HOST} ^stage\.thorsten-weber-online\.eu$
+	RewriteRule .? - [E=TYPO3_CONTEXT:Production/Stage]
+	RewriteCond %{HTTP_HOST} ^production\.thorsten-weber-online\.eu$
+	RewriteRule .? - [E=TYPO3_CONTEXT:Production]
+	RewriteCond %{HTTP_HOST} ^snowowl\.uber\.space$
+	RewriteRule .? - [E=TYPO3_CONTEXT:Production]
 
 	# Rule for versioned static files, configured through:
 	# - $GLOBALS['TYPO3_CONF_VARS']['BE']['versionNumberInFilename']
