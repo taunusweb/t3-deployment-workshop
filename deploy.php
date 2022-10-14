@@ -44,7 +44,6 @@ set('rsync', [
 
 set('rsync_src', __DIR__);
 set('rsync_dest','{{release_path}}');
-// TODO: setup options to sync all necessary folders incl. vendor!
 
 
 // Set up / extend options for shared/ writable
@@ -70,31 +69,27 @@ set('log_files', '/var/www/html/logs.txt');
 // Staging
 host('stage')
     ->setLabels([
-        'stage' => 'staging'
+        'stage' => 'Staging'
     ])
     ->set('stageDir', 'stage')
-    ->setHostname('p485699.webspaceconfig.de')
+    ->setHostname(getenv('STAGING_SSH_HOST'))
     ->setDeployPath($deployPath . '/{{stageDir}}')
-    ->setRemoteUser( 'p485699')
-    ->set('http_user', 'p485699')
+    ->setRemoteUser( getenv('STAGING_SSH_USER'))
+    ->set('http_user', getenv('STAGING_SSH_USER'))
     /*->set('deploy_path', '~/t3deployws')*/
 ;
 
 /**
  * setup live host
  */
-host('stage-p')
+host('production')
     ->setLabels([
-        'stage' => 'production'
+        'stage' => 'Production'
     ])
     ->set('stageDir', 'production')
-//    ->setHostname('p485699.webspaceconfig.de')
-//    ->setDeployPath($deployPath . '/{{stageDir}}')
-//    ->setRemoteUser( 'p485699')
-//    ->set('http_user', 'p485699')
-    ->setHostname('regulus.uberspace.de')
+    ->setHostname(getenv('PRODUCTION_SSH_HOST'))
     ->setDeployPath($deployPathProd . '/{{stageDir}}')
-    ->setRemoteUser( 'snowowl')
+    ->setRemoteUser(getenv('PRODUCTION_SSH_USER'))
     /*->set('deploy_path', '~/t3deployws')*/;
 
 
