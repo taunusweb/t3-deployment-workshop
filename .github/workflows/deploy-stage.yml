@@ -7,11 +7,12 @@ on:
 
 # It is important to specify "concurrency" for the workflow,
 # to prevent concurrency between different deploys.
-concurrency: staging
+concurrency: Staging
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: Staging
 
     steps:
       - uses: actions/checkout@v2
@@ -46,5 +47,5 @@ jobs:
           dep: deploy stage
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         env:
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USER }}
+          STAGING_SSH_HOST: ${{ secrets.SSH_HOST }}
+          STAGING_SSH_USER: ${{ secrets.SSH_USER }}

@@ -6,8 +6,13 @@ $context = \TYPO3\CMS\Core\Core\Environment::getContext()->isTesting() ? 'testin
 $subContext = explode('/', \TYPO3\CMS\Core\Core\Environment::getContext()->__toString());
 $context .= isset($subContext[1]) ? '-' . strtolower($subContext[1]) : '';
 
-$dotenv = \Dotenv\Dotenv::createUnsafeMutable(dirname(__DIR__,2) . '/');
-$dotenv->load();
+try {
+    $dotenv = \Dotenv\Dotenv::createUnsafeMutable(dirname(__DIR__,2) . '/');
+    $dotenv->load();
+} catch (\Dotenv\Exception\InvalidPathException $exception) {
+        printf("[WARNING]: Missing dotenv file -> %s \n", $exception->getMessage());
+}
+
 
 // Database Credentials
 $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = getenv('TYPO3_DB_HOST');
