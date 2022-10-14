@@ -11,7 +11,7 @@ $deployPath = '/home/www/p485699/html/t3-dep-ws';
 $deployPathProd = '/var/www/virtual/snowowl/serve';
 
 // Set TYPO3 Docroot/ Webroot
-set('typo3_webroot', 'public');
+set('typo3_webroot', '/public');
 set('keep_releases', 5);
 
 // Set repository not needed for rsync deployments
@@ -29,8 +29,8 @@ set('rsync', [
         'deploy.php',
         'LICENSE',
         'README.md',
-        'public/fileadmin',
-        'public/typo3temp',
+        '/public/fileadmin',
+        '/public/typo3temp',
     ],
     'exclude-file' => false,
     'filter' => [],
@@ -56,8 +56,8 @@ add('shared_files', [
 add('shared_dirs', [
     '{{typo3_webroot}}/fileadmin',
     '{{typo3_webroot}}/typo3temp',
-    '{{release_path}}/var/lock',
-    '{{release_path}}/var/log',
+    '/var/lock',
+    '/var/log',
 ]);
 add('writable_dirs', []);
 
@@ -112,7 +112,8 @@ task('demo_task', function() {
     foreach(get('shared_files') as $file) {
         writeln($file);
    }
-    writeln('releasePath set to {{release_path}}' );
+    writeln('releasePath set to {{release_or_current_path}}' );
+    writeln('current + web Path set to "{{current_path}}" + "{{typo3_webroot}}"' );
 });
 
 /**
